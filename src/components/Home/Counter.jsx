@@ -1,10 +1,12 @@
-import React, { useRef, useState, useMemo } from "react";
+import React, { useRef, useState, useMemo, useEffect } from "react";
 import Countdown, { zeroPad } from "react-countdown";
 import { Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./counter.css";
+import { useNavigate } from "react-router-dom";
 
 function Counter({ data, handle }) {
+  let history = useNavigate();
   //for pause timer
   const [pause, setPause] = useState(true);
   //for timer start initial state is 25 because we want default is 25 mins
@@ -15,6 +17,7 @@ function Counter({ data, handle }) {
     two: 15,
     three: 5
   });
+  const [isDisable, setisDisable] = useState(false);
   // define state for timerNumber counter we are clicked like pomo short or long
   const [clickedBy, setClickedBy] = useState("pomo");
   //use useRef hook for  handling rerendering of timer
@@ -35,7 +38,7 @@ function Counter({ data, handle }) {
   );
 
   const refreshPage = () => {
-    window.location.replace("/");
+    window.location.reload();
   };
 
   const arr = JSON.parse(localStorage.getItem("timesData")) || [];
@@ -43,12 +46,21 @@ function Counter({ data, handle }) {
     arr.splice(index, 1);
     localStorage.setItem("timesData", JSON.stringify(arr));
   };
+  useEffect(() => {
+    if (arr.length === 0) {
+      setisDisable(true);
+    } else {
+      setisDisable(false);
+    }
+  }, [arr]);
+
+  console.log("out" + arr.length);
   const renderer = ({ minutes, seconds, completed }) => {
     if (completed) {
       audio.play();
       alert("timer over");
       removeTodo();
-      refreshPage();
+      history("/reports");
     } else {
       return (
         <span>
@@ -153,6 +165,7 @@ function Counter({ data, handle }) {
         {Timer(date)}
         {pause ? (
           <Button
+            disabled={isDisable}
             style={Stylee}
             onClick={() => {
               handleStart();

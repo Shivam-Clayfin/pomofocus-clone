@@ -15,11 +15,7 @@ export default function Signup() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("jhsh");
-    createUserWithEmailAndPassword(
-      auth,
-      "reeteshmeena73@gmail.com",
-      "reetesh@12"
-    )
+    createUserWithEmailAndPassword(auth, email, password)
       .then((snap) => {
         console.log(snap);
       })
