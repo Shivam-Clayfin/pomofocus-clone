@@ -37,15 +37,12 @@ function Counter({ data, handle }) {
     "http://cld3097web.audiovideoweb.com/va90web25003/companions/Foundations%20of%20Rock/13.05.mp3"
   );
 
-  const refreshPage = () => {
-    window.location.reload();
-  };
-
   const arr = JSON.parse(localStorage.getItem("timesData")) || [];
   const removeTodo = (index) => {
     arr.splice(index, 1);
     localStorage.setItem("timesData", JSON.stringify(arr));
   };
+
   useEffect(() => {
     if (arr.length === 0) {
       setisDisable(true);
@@ -54,13 +51,13 @@ function Counter({ data, handle }) {
     }
   }, [arr]);
 
-  console.log("out" + arr.length);
   const renderer = ({ minutes, seconds, completed }) => {
     if (completed) {
       audio.play();
       alert("timer over");
       removeTodo();
       history("/reports");
+      audio.pause();
     } else {
       return (
         <span>

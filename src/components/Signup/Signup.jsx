@@ -1,40 +1,36 @@
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword
-} from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { auth } from "../../firebase";
+import { useNavigate } from "react-router-dom";
 import "./signup.css";
 export default function Signup() {
-  const [username, setUsername] = useState("");
+  const router = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  const [error, setError] = useState(false);
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("jhsh");
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((snap) => {
-        console.log(snap);
-      })
-      .catch((e) => {
-        console.log(e.code);
-      });
+  const [name, setName] = useState("");
+  const handelSignup = async () => {
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+      updateProfile(auth.currentUser, { displayName: name });
+      router("/");
+    } catch (error) {
+      if (error.code === "auth/email-already-in-use")
+        alert("user Already There");
+      console.log("error", error.code);
+    }
   };
 
-  console.log(username);
   return (
     <div className="signup">
       <span className="signuptitel">Signup</span>
-      <form className="signupForm" onSubmit={(e) => handleSubmit(e)}>
+      <form className="signupForm" onSubmit={handelSignup}>
         <lable>Username</lable>
         <input
           className="signupInput"
           type="text"
           placeholder="Enter Your Username..."
-          onChange={(e) => setUsername(e.target.value)}
+          onChange={(e) => setName(e.target.value)}
         />
         <lable>Email</lable>
         <input
@@ -58,11 +54,6 @@ export default function Signup() {
         <h6>If you have existing account</h6>
         <button className="signupLogin">Login</button>
       </Link>
-      {error && (
-        <span style={{ color: "red", marginTop: "10px" }}>
-          Something Went Wrong
-        </span>
-      )}
     </div>
   );
 }

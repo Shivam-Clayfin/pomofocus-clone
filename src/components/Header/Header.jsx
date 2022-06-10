@@ -28,6 +28,9 @@ function Header({ handleCallBack }) {
     e.preventDefault();
     setShow(false);
     onTrigger();
+    const mainData = JSON.parse(localStorage.getItem("mainArr")) || [];
+    mainData.push(times);
+    localStorage.setItem("mainArr", JSON.stringify(mainData));
     const arr = JSON.parse(localStorage.getItem("timesData")) || [];
     arr.push(times);
     localStorage.setItem("timesData", JSON.stringify(arr));

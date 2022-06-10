@@ -1,0 +1,107 @@
+.header {
+  width: 33%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+  margin: auto;
+  color: white;
+  margin-top: 6px;
+  bottom: 30px;
+}
+.logo {
+  display: flex;
+  height: 50px;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.logo img {
+  height: 20px;
+  width: 20px;
+  margin-right: 4px;
+}
+.title {
+  font-family: 20px;
+  line-height: 1.4em;
+  font-weight: bold;
+}
+.items {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  align-content: center;
+  list-style-type: none;
+}
+.link {
+  text-decoration: none;
+}
+.item {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  border-radius: 4px;
+  cursor: pointer;
+  opacity: 0.9;
+  background: none rgba(255, 255, 255, 0.2);
+  box-shadow: none;
+  margin-left: 10px;
+  font-size: 13px;
+  padding: 8px 12px;
+  box-sizing: border-box;
+  color: white;
+}
+.item img {
+  height: 15px;
+  width: 15px;
+  margin-right: 5px;
+  margin-top: 1px;
+}
+.itemtext {
+  font-size: 12px;
+}
+
+.containerR {
+  font-family: sans-serif;
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  left: 20px;
+  margin: 0;
+  height: 700px;
+  width: 100%;
+  background-color: #db524d;
+  transition: background-color 0.5s ease-in-out 0s;
+}
+.taskList {
+  position: relative;
+  top: 2%;
+  left: 30%;
+  width: 50%;
+  color: black;
+  font-size: 16px;
+  font-weight: bolder;
+  margin: 4px;
+  padding: 5px;
+  background-color: whitesmoke;
+  border: 1px solid orangered;
+  border-radius: 5%;
+}
+.cross {
+  position: absolute;
+  width: 100px;
+  height: 30px;
+  background-color: red;
+  color: white;
+  font-size: 18px;
+  text-align: center;
+  align-items: center;
+  top: 16%;
+  left: 71%;
+}
+.taskText {
+  text-align: center;
+  justify-content: center;
+  margin-top: 30px;
+}
